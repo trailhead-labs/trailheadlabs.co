@@ -10,26 +10,40 @@
   </head>
   <body class="bg-[#0c0d15] text-white antialiased min-h-svh flex flex-col select-none">
 
+    <a href="#main" tabindex="0" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-[#30347f] focus:text-white focus:text-sm focus:font-medium focus:px-4 focus:py-2 focus:rounded-lg">
+      Skip to content
+    </a>
+
     <header class="px-8 py-8 flex justify-between items-center">
       <img src="/src/logo.svg" alt="Trailhead Labs" class="h-7 w-auto brightness-0 invert opacity-90" />
-      <a href="https://leuver.ink" class="text-sm text-white/30 hover:text-white/70 transition-colors duration-200">
+      <a href="https://leuver.ink"
+         tabindex="0"
+         class="text-sm text-white/30 hover:text-white/70 transition-colors duration-200 rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:text-white/70"
+         target="_blank"
+         rel="noopener noreferrer">
         leuver.ink&nbsp;→
       </a>
     </header>
 
-    <main class="flex-1 flex flex-col justify-center px-8 pb-16">
+    <main id="main" class="flex-1 flex flex-col justify-center px-8 pb-16">
       <div class="max-w-5xl mx-auto w-full">
         <h1 class="text-[clamp(3rem,9vw,8rem)] font-bold tracking-tight leading-[0.95] text-balance">
-          Just good<br>engineering<span class="text-[#30347f]">.</span>
+          Just good<br>engineering<span class="text-[#30347f]" aria-hidden="true">.</span>
         </h1>
         <p class="mt-8 text-base sm:text-lg text-white/40 max-w-md leading-relaxed">
-          Web, desktop & mobile apps, tooling, and automation.
+          Web, desktop &amp; mobile apps, tooling, and automation.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-4">
-          <a href="mailto:willem@leuver.ink" class="bg-[#30347f] hover:bg-[#3a3f96] text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors duration-200">
+          <a href="mailto:willem@leuver.ink"
+             tabindex="0"
+             class="bg-[#30347f] hover:bg-[#3a3f96] text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15]">
             Get in touch
           </a>
-          <a href="https://leuver.ink/software" class="text-sm text-white/40 hover:text-white/70 transition-colors duration-200">
+          <a href="https://leuver.ink/software"
+             tabindex="0"
+             class="text-sm text-white/40 hover:text-white/70 transition-colors duration-200 rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:text-white/70"
+             target="_blank"
+             rel="noopener noreferrer">
             See the work →
           </a>
         </div>
@@ -38,7 +52,7 @@
 
     <footer class="px-8 py-6 flex justify-between items-center text-xs text-white/20">
       <span>&copy; <span id="year"></span> Trailhead Labs</span>
-      <span>KvK 12345678</span>
+      <span>KvK 98524879</span>
     </footer>
 
     <script>
