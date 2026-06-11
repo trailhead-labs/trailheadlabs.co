@@ -7,14 +7,53 @@
     <meta name="description" content="Independent software consultant available for projects, consulting, and pair programming." />
     <link rel="stylesheet" href="/src/style.css" />
     <link rel="icon" type="image/svg+xml" href="/src/logo.svg" />
+    <style>
+      @keyframes drift-1 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33%       { transform: translate(-50px, 35px) scale(1.04); }
+        66%       { transform: translate(35px, -25px) scale(0.97); }
+      }
+      @keyframes drift-2 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33%       { transform: translate(40px, -35px) scale(0.96); }
+        66%       { transform: translate(-30px, 45px) scale(1.03); }
+      }
+      .blob {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        will-change: transform;
+        filter: blur(120px);
+        z-index: 0;
+      }
+      .blob-1 {
+        width: 650px;
+        height: 650px;
+        background: rgba(48, 52, 127, 0.2);
+        top: -220px;
+        right: -180px;
+        animation: drift-1 28s ease-in-out infinite;
+      }
+      .blob-2 {
+        width: 520px;
+        height: 520px;
+        background: rgba(60, 20, 100, 0.15);
+        bottom: -160px;
+        left: -160px;
+        animation: drift-2 34s ease-in-out infinite;
+      }
+    </style>
   </head>
   <body class="bg-[#0c0d15] text-white antialiased min-h-svh flex flex-col select-none">
+
+    <div class="blob blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2" aria-hidden="true"></div>
 
     <a href="#main" tabindex="0" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-[#30347f] focus:text-white focus:text-sm focus:font-medium focus:px-4 focus:py-2 focus:rounded-lg">
       Skip to content
     </a>
 
-    <header class="px-8 py-8 flex justify-between items-center">
+    <header class="relative z-10 px-8 py-8 flex justify-between items-center">
       <img src="/src/logo.svg" alt="Trailhead Labs" class="h-7 w-auto brightness-0 invert opacity-90" />
       <a href="https://leuver.ink"
          tabindex="0"
@@ -25,7 +64,7 @@
       </a>
     </header>
 
-    <main id="main" class="flex-1 flex flex-col justify-center px-8 pb-16">
+    <main id="main" class="relative z-10 flex-1 flex flex-col justify-center px-8 pb-16">
       <div class="max-w-5xl mx-auto w-full">
         <h1 class="text-[clamp(3rem,9vw,8rem)] font-bold tracking-tight leading-[0.95] text-balance">
           Just good<br>engineering<span class="text-[#30347f]" aria-hidden="true">.</span>
@@ -50,9 +89,9 @@
       </div>
     </main>
 
-    <footer class="px-8 py-6 flex justify-between items-center text-xs text-white/20">
+    <footer class="relative z-10 px-8 py-6 flex justify-between items-center text-xs text-white/20">
       <span>&copy; <span id="year"></span> Trailhead Labs</span>
-      <span>KvK 98524879</span>
+      <span>KvK <span class="select-text">98524879</span></span>
     </footer>
 
     <script>
