@@ -6,43 +6,9 @@
     <title>Trailhead Labs</title>
     <meta name="description" content="Independent software consultant available for projects, consulting, and pair programming." />
     <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
     <link rel="icon" type="image/svg+xml" href="/src/logo.svg" />
-    <style>
-      @keyframes drift-1 {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33%       { transform: translate(-50px, 35px) scale(1.04); }
-        66%       { transform: translate(35px, -25px) scale(0.97); }
-      }
-      @keyframes drift-2 {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33%       { transform: translate(40px, -35px) scale(0.96); }
-        66%       { transform: translate(-30px, 45px) scale(1.03); }
-      }
-      .blob {
-        position: fixed;
-        border-radius: 50%;
-        pointer-events: none;
-        will-change: transform;
-        filter: blur(120px);
-        z-index: 0;
-      }
-      .blob-1 {
-        width: 650px;
-        height: 650px;
-        background: rgba(48, 52, 127, 0.2);
-        top: -220px;
-        right: -180px;
-        animation: drift-1 28s ease-in-out infinite;
-      }
-      .blob-2 {
-        width: 520px;
-        height: 520px;
-        background: rgba(60, 20, 100, 0.15);
-        bottom: -160px;
-        left: -160px;
-        animation: drift-2 34s ease-in-out infinite;
-      }
-    </style>
+
   </head>
   <body class="bg-[#0c0d15] text-white antialiased min-h-svh flex flex-col select-none">
 
