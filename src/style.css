@@ -10,30 +10,153 @@
   33%       { transform: translate(40px, -35px) scale(0.96); }
   66%       { transform: translate(-30px, 45px) scale(1.03); }
 }
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-25px, -40px) scale(1.05); }
+}
+@keyframes drift-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(30px, 30px) scale(0.95); }
+}
 
 [x-cloak] { display: none !important; }
 
-.blob {
+/*
+ * The ambient field. Clipped to the viewport so the oversized
+ * blobs never widen the document on small screens.
+ */
+.blob-field {
   position: fixed;
-  border-radius: 50%;
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
-  will-change: transform;
-  filter: blur(120px);
   z-index: 0;
 }
+
+/*
+ * Each blob is two elements so the two motions never fight:
+ * the outer holds the reveal state, the inner keeps drifting.
+ */
+.blob {
+  position: absolute;
+  pointer-events: none;
+  transition:
+    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.blob > i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  filter: blur(120px);
+  will-change: transform;
+}
+
 .blob-1 {
   width: 650px;
   height: 650px;
-  background: rgba(48, 52, 127, 0.15);
   top: -220px;
   right: -180px;
+}
+.blob-1 > i {
+  background: rgba(48, 52, 127, 0.15);
   animation: drift-1 28s ease-in-out infinite;
 }
+
 .blob-2 {
   width: 520px;
   height: 520px;
-  background: rgba(60, 20, 100, 0.10);
   bottom: -160px;
   left: -160px;
+}
+.blob-2 > i {
+  background: rgba(60, 20, 100, 0.10);
   animation: drift-2 34s ease-in-out infinite;
+}
+
+/* The two product lights, dark until the work is on stage. */
+.blob-humm,
+.blob-devkeepr {
+  opacity: 0;
+}
+
+/* Each product light sits behind its own panel, so looking at one warms that side of the page. */
+.blob-humm {
+  width: 660px;
+  height: 660px;
+  top: 50%;
+  left: 28%;
+  margin: -330px 0 0 -330px;
+}
+.blob-humm > i {
+  background: radial-gradient(circle at 50% 45%, rgba(139, 124, 240, 0.38), rgba(224, 138, 95, 0.16) 70%);
+  animation: drift-3 24s ease-in-out infinite;
+}
+
+.blob-devkeepr {
+  width: 740px;
+  height: 740px;
+  top: 50%;
+  left: 66%;
+  margin: -370px 0 0 -370px;
+}
+.blob-devkeepr > i {
+  background: radial-gradient(circle at 50% 45%, rgba(56, 189, 248, 0.28), rgba(14, 116, 165, 0.12) 70%);
+  animation: drift-4 30s ease-in-out infinite;
+}
+
+/* Opening the work pulls the house lights down and brings the products up. */
+.work-open .blob-1 { opacity: 0.4; }
+.work-open .blob-2 { opacity: 0.3; }
+.work-open .blob-humm { opacity: 0.5; }
+.work-open .blob-devkeepr { opacity: 0.45; }
+
+/* Looking at one product lights the room in its color. */
+body[data-focus="humm"] .blob-humm { opacity: 1; transform: scale(1.12); }
+body[data-focus="humm"] .blob-devkeepr { opacity: 0.08; }
+body[data-focus="humm"] .blob-1 { opacity: 0.15; }
+
+body[data-focus="devkeepr"] .blob-devkeepr { opacity: 1; transform: scale(1.12); }
+body[data-focus="devkeepr"] .blob-humm { opacity: 0.08; }
+body[data-focus="devkeepr"] .blob-1 { opacity: 0.15; }
+
+/*
+ * Layers animate on the display flip Alpine performs, so every
+ * reveal replays the stagger without any extra state.
+ * --gap holds the incoming layer back until the outgoing
+ * one has fully left, so the two never overlap.
+ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); pointer-events: none; }
+  to   { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 750ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--gap, 0ms) + var(--d, 0ms));
+}
+
+/* Humm's own timer dial, drawn once as the card arrives. */
+@keyframes sweep {
+  to { stroke-dashoffset: 16; }
+}
+.arc-sweep {
+  stroke-dasharray: 56.55;
+  stroke-dashoffset: 56.55;
+  animation: sweep 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--gap, 0ms) + var(--d, 0ms));
+}
+
+/* Screenshots dissolve into the panel instead of stopping at an edge. */
+.fade-out {
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob > i { animation: none; }
+  .rise { animation: none; }
+  .arc-sweep { animation: none; stroke-dashoffset: 16; }
+  .blob { transition-duration: 1ms; }
+  body[data-focus] .blob { transform: none; }
 }
