@@ -1,21 +1,30 @@
 <?php
 
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\Route;
 
+/*
+ * Stamp public assets with their last modified time.
+ *
+ * Everything under public is served straight from disk, so unlike the Vite
+ * build it carries no content hash and a CDN will happily hold on to a
+ * replaced image. The mtime moves it along.
+ */
+UrlGenerator::macro('version', function (string $path): string {
+    $file = public_path($path);
+
+    return is_file($file)
+        ? $path.'?v='.filemtime($file)
+        : $path;
+});
+
+/*
+ * Routes load without the web middleware group on purpose. A site that
+ * exports to static HTML has no sessions, cookies or CSRF tokens to
+ * carry, and skipping them keeps the database out of a render.
+ */
 return Application::configure(basePath: dirname(__DIR__))
-    ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        commands: __DIR__.'/../routes/console.php',
-        health: '/up',
-    )
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
-    })
-    ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->shouldRenderJsonWhen(
-            fn (Request $request) => $request->is('api/*'),
-        );
-    })->create();
+    ->withRouting(using: fn () => Route::group([], base_path('routes/web.php')))
+    ->withExceptions()
+    ->create();

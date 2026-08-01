@@ -41,8 +41,8 @@ return [
      */
     'exclude_file_patterns' => [
         '/\.php$/',
-        '/mix-manifest\.json$/',
         '/public\/hot$/',
+        '/build\/manifest\.json$/',
     ],
 
     /*
