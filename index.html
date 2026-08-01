@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trailhead Labs</title>
+    <meta name="description" content="Independent engineering for web, desktop and mobile. Client work and our own products, held to the same bar: software that ships and holds up." />
+    <link rel="preload" as="style" href="https://trailheadlabs.co/build/assets/app-DBPF0NAQ.css" /><link rel="modulepreload" as="script" href="https://trailheadlabs.co/build/assets/app-BNZKYSEc.js" /><link rel="stylesheet" href="https://trailheadlabs.co/build/assets/app-DBPF0NAQ.css" /><script type="module" src="https://trailheadlabs.co/build/assets/app-BNZKYSEc.js"></script>    <link rel="icon" type="image/svg+xml" href="/logo.svg?v=1785624529" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G9R9Z7BBS7"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-G9R9Z7BBS7');
+</script>
+</head>
+
+<body class="flex min-h-svh flex-col bg-[#0c0d15] text-white antialiased select-none" x-data="site" :class="open && 'work-open'" :data-focus="focus" @keydown.escape.window="open && hide()">
+    <div class="blob-field" aria-hidden="true">
+    <div class="blob blob-1"><i></i></div>
+    <div class="blob blob-2"><i></i></div>
+    <div class="blob blob-humm"><i></i></div>
+    <div class="blob blob-devkeepr"><i></i></div>
+</div>
+
+    <a
+        href="#main"
+        tabindex="0"
+        class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-[#30347f] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+    >
+        Skip to content
+    </a>
+
+    <header class="relative z-10 flex items-center justify-between px-8 py-8">
+    <img
+        src="/logo.svg?v=1785624529"
+        alt="Trailhead Labs"
+        class="h-7 w-auto opacity-90 brightness-0 invert"
+    />
+    <a
+        href="https://leuver.ink"
+        tabindex="0"
+        class="rounded px-2 py-1 text-sm text-white/30 transition-colors duration-200 hover:text-white/70 focus-visible:text-white/70 focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        leuver.ink&nbsp;→
+    </a>
+</header>
+
+    <main id="main" class="relative z-10 grid flex-1 px-8 pb-16"><div class="flex flex-col justify-center [grid-area:1/1]" style="--gap: 320ms;" x-show="! open" x-transition:leave="transition ease-in duration-350" x-transition:leave-start="opacity-100 translate-y-0 blur-[0px]" x-transition:leave-end="opacity-0 -translate-y-8 blur-sm">
+    <div class="mx-auto w-full max-w-5xl">
+        <h1 class="rise text-[clamp(3rem,9vw,8rem)] leading-[0.95] font-bold tracking-tight text-balance">
+            Just good<br />engineering<span class="text-[#30347f]" aria-hidden="true">.</span>
+        </h1>
+        <p class="rise mt-8 max-w-md text-base leading-relaxed text-white/40 sm:text-lg" style="--d: 90ms">
+            Web, desktop &amp; mobile apps, tooling, and automation.
+        </p>
+        <div class="rise mt-10 flex flex-wrap items-center gap-4" style="--d: 160ms">
+            <a
+                href="mailto:willem@leuver.ink"
+                tabindex="0"
+                class="rounded-lg bg-[#30347f] px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#3a3f96] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+            >
+                Get in touch
+            </a>
+            <button
+                type="button"
+                x-ref="trigger"
+                @click="show()"
+                class="group flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 text-sm text-white/40 transition-colors duration-200 hover:text-white/70 focus-visible:text-white/70 focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+            >
+                See the work
+                <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 2v10M3 8l4 4 4-4" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+    <div class="flex flex-col justify-center [grid-area:1/1]" style="--gap: 370ms;" x-show="open" x-cloak="" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+    <div class="mx-auto w-full max-w-5xl py-8">
+        <div class="rise flex items-center justify-between gap-4">
+            <h2
+                x-ref="stageHeading"
+                tabindex="-1"
+                class="text-xs tracking-[0.2em] text-white/30 uppercase focus:outline-none"
+            >
+                Our own products
+            </h2>
+            <button
+                type="button"
+                @click="hide()"
+                class="group flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 text-sm text-white/30 transition-colors duration-200 hover:text-white/70 focus-visible:text-white/70 focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+            >
+                <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 12V2M3 6l4-4 4 4" />
+                </svg>
+                Back
+            </button>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-12">
+            <a
+    target="_blank" rel="noopener noreferrer" style="--accent: #8b7cf0; --d: 90ms;" class="rise group relative flex min-h-[24rem] flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-7 transition-colors duration-500 hover:border-[color:var(--accent)]/40 hover:bg-white/[0.04] focus-visible:border-[color:var(--accent)]/60 focus-visible:bg-white/[0.04] focus-visible:outline-none lg:col-span-5"
+    href="https://hummtuned.app"
+    @mouseenter="focus = 'humm'"
+    @mouseleave="focus = null"
+    @focus="focus = 'humm'"
+    @blur="focus = null"
+>
+    <div class="flex items-center gap-2.5">
+                        <svg class="h-5 w-5 -rotate-90" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" class="text-white/8" />
+                            <circle cx="12" cy="12" r="9" stroke="url(#humm-arc)" stroke-width="1.5" stroke-linecap="round" class="arc-sweep" style="--d:340ms" />
+                            <defs>
+                                <linearGradient id="humm-arc" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#8b7cf0" />
+                                    <stop offset="1" stop-color="#e08a5f" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="text-[0.6875rem] font-medium tracking-[0.18em] text-[color:var(--accent)]/80 uppercase">
+                            iOS &amp; Android
+                        </span>
+                    </div>
+
+    <h3 class="mt-5 text-2xl font-bold tracking-tight">Humm</h3>
+    <p class="mt-2.5 text-sm leading-relaxed text-white/40 max-w-[22rem]">One dial for focus, sleep, wake and dream. Binaural programs under a soundscape mixed fresh every
+                session, each graded on the research behind it and honest about where the evidence thins.</p>
+
+    <div class="mt-auto pt-8 flex justify-center"><div class="fade-out -mb-24 w-[52%] rounded-[1.6rem] border border-white/10 bg-white/5 p-1.5 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+                        <img
+                            src="/work/humm.webp?v=1785400739"
+                            alt="The Humm timer dial mid-session"
+                            width="1206"
+                            height="2622"
+                            loading="lazy"
+                            class="w-full rounded-[1.25rem]"
+                        />
+                    </div></div>
+</a>
+
+            <a
+    target="_blank" rel="noopener noreferrer" style="--accent: #38bdf8; --d: 170ms;" class="rise group relative flex min-h-[24rem] flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-7 transition-colors duration-500 hover:border-[color:var(--accent)]/40 hover:bg-white/[0.04] focus-visible:border-[color:var(--accent)]/60 focus-visible:bg-white/[0.04] focus-visible:outline-none lg:col-span-7"
+    href="https://devkeepr.app"
+    @mouseenter="focus = 'devkeepr'"
+    @mouseleave="focus = null"
+    @focus="focus = 'devkeepr'"
+    @blur="focus = null"
+>
+    <!-- Matches the height of Humm's dial glyph so both cards share a baseline. -->
+                    <div class="flex h-5 items-center">
+                        <span class="text-[0.6875rem] font-medium tracking-[0.18em] text-[color:var(--accent)]/80 uppercase">
+                            macOS
+                            <!-- &middot; Windows &middot; Linux -->
+                        </span>
+                    </div>
+
+    <h3 class="mt-5 text-2xl font-bold tracking-tight">Devkeepr</h3>
+    <p class="mt-2.5 text-sm leading-relaxed text-white/40 max-w-lg">One home for every project on your machine. Dev servers, agents and terminals wait where you left them.
+                Idle projects shrink to reclaim disk and wake instantly, while the global toolchain updates on its own.</p>
+
+    <div class="mt-auto pt-8"><div class="fade-out -mb-8 transition-transform duration-500 ease-out group-hover:-translate-y-2">
+                        <img
+                            src="/work/devkeepr.webp?v=1785453607"
+                            alt="The Devkeepr overview: session cost, disk reclaimed, global packages, and every project with its size and state"
+                            width="1400"
+                            height="855"
+                            loading="lazy"
+                            class="w-full rounded-t-lg"
+                        />
+                    </div></div>
+</a>
+        </div>
+
+        <p class="rise mt-6 text-sm text-white/25" style="--d: 260ms">
+            Writing and open source at
+            <a
+                href="https://leuver.ink"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="rounded text-white/40 underline decoration-white/15 underline-offset-4 transition-colors duration-200 hover:text-white/70 focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+            >leuver.ink</a>
+        </p>
+    </div>
+</div></main>
+
+    <footer class="relative z-10 flex items-center justify-between px-8 py-6 text-xs text-white/20">
+    <span x-init x-cloak>
+        &copy;
+        <span x-text="new Date().getFullYear()"></span>
+        Trailhead Labs
+    </span>
+
+    <span>
+        KvK
+        <span class="select-text">98524879</span>
+    </span>
+</footer>
+</body>
+</html>
