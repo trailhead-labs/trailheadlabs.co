@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@source '../../storage/framework/views/*.php';
-
 @keyframes drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%       { transform: translate(-50px, 35px) scale(1.04); }
