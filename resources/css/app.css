@@ -147,6 +147,57 @@ body[data-focus="devkeepr"] .blob-1 { opacity: 0.15; }
   animation-delay: calc(var(--gap, 0ms) + var(--d, 0ms));
 }
 
+/*
+ * The lit control. Only the light it holds ever moves, so the
+ * button stays exactly where it was aimed at.
+ */
+.lit {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 200ms ease;
+}
+
+/* The light rides along, and sits centered for anyone arriving by keyboard. */
+.lit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(110px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.16), transparent 65%);
+  opacity: 0;
+  transition: opacity 350ms ease;
+  pointer-events: none;
+}
+.lit:hover::after,
+.lit:focus-visible::after {
+  opacity: 1;
+}
+
+/*
+ * The label and its answer share one grid cell, so the button is laid
+ * out wide enough for both from the start and nothing shifts when
+ * they trade places. The cell also keeps them above the light.
+ */
+.lit-stack {
+  display: grid;
+  position: relative;
+  text-align: center;
+}
+.lit-stack > * {
+  grid-area: 1 / 1;
+  transition: opacity 200ms ease;
+}
+
+/* The answer waits out of sight until the mail client is on its way. */
+.lit-answer {
+  opacity: 0;
+}
+.spoke .lit-label {
+  opacity: 0;
+}
+.spoke .lit-answer {
+  opacity: 1;
+}
+
 /* Screenshots dissolve into the panel instead of stopping at an edge. */
 .fade-out {
   -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);

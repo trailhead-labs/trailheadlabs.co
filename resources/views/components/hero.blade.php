@@ -13,11 +13,18 @@
         </p>
         <div class="rise mt-10 flex flex-wrap items-center gap-4" style="--d: 160ms">
             <a
+                x-data="contact"
+                @pointermove="track"
+                @click.prevent="speak()"
+                :class="spoke && 'spoke'"
                 href="mailto:willem@leuver.ink"
                 tabindex="0"
-                class="rounded-lg bg-[#30347f] px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-[#3a3f96] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+                class="lit rounded-lg bg-[#30347f] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#3a3f96] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
             >
-                Get in touch
+                <span class="lit-stack">
+                    <span class="lit-label">Get in touch</span>
+                    <span class="lit-answer" aria-hidden="true">Speak soon!</span>
+                </span>
             </a>
             <button
                 type="button"
