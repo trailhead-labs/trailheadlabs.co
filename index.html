@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trailhead Labs</title>
     <meta name="description" content="Independent engineering for web, desktop and mobile. Client work and our own products, held to the same bar: software that ships and holds up." />
-    <link rel="preload" as="style" href="https://trailheadlabs.co/build/assets/app-s4rc9Bgs.css" /><link rel="modulepreload" as="script" href="https://trailheadlabs.co/build/assets/app-CU_tIN8h.js" /><link rel="stylesheet" href="https://trailheadlabs.co/build/assets/app-s4rc9Bgs.css" /><script type="module" src="https://trailheadlabs.co/build/assets/app-CU_tIN8h.js"></script>    <link rel="icon" type="image/svg+xml" href="/logo.svg?v=1785625939" />
+    
+    <link rel="preload" as="style" href="https://trailheadlabs.co/build/assets/app-Qd8sms60.css" /><link rel="modulepreload" as="script" href="https://trailheadlabs.co/build/assets/app-CFMdToEE.js" /><link rel="stylesheet" href="https://trailheadlabs.co/build/assets/app-Qd8sms60.css" /><script type="module" src="https://trailheadlabs.co/build/assets/app-CFMdToEE.js"></script>    <link rel="icon" type="image/svg+xml" href="/logo.svg?v=1785625939" />
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G9R9Z7BBS7"></script>
 <script>
@@ -19,12 +20,13 @@
 </script>
 </head>
 
-<body class="flex min-h-svh flex-col bg-[#0c0d15] text-white antialiased select-none" x-data="site" :class="open && 'work-open'" :data-focus="focus" @keydown.escape.window="open && hide()">
+<body class="flex min-h-svh flex-col bg-[#0c0d15] text-white antialiased select-none" x-data="site" data-trailer-path="/grand-crank-auto" :class="open && 'work-open'" :data-focus="focus" @keydown.escape.window="open && ! $refs.trailer.open && hide()">
     <div class="blob-field" aria-hidden="true">
     <div class="blob blob-1"><i></i></div>
     <div class="blob blob-2"><i></i></div>
-    <div class="blob blob-humm"><i></i></div>
-    <div class="blob blob-devkeepr"><i></i></div>
+    <div class="blob blob-product blob-humm"><i></i></div>
+    <div class="blob blob-product blob-devkeepr"><i></i></div>
+    <div class="blob blob-product blob-grand-crank-auto"><i></i></div>
 </div>
 
     <a
@@ -54,6 +56,25 @@
 
     <main id="main" class="relative z-10 grid flex-1 px-8 pb-16"><div class="flex flex-col justify-center [grid-area:1/1]" style="--gap: 320ms;" x-show="! open" x-transition:leave="transition ease-in duration-350" x-transition:leave-start="opacity-100 translate-y-0 blur-[0px]" x-transition:leave-end="opacity-0 -translate-y-8 blur-sm">
     <div class="mx-auto w-full max-w-5xl">
+        <!-- Arrives after the rest has landed, so it reads as news rather than the headline. -->
+        <a
+            href="https://trailheadlabs.co/grand-crank-auto"
+            @click.prevent="watch()"
+            class="rise group mb-8 inline-flex items-center gap-2.5 rounded-full border border-white/8 bg-white/[0.03] py-1 pr-3 pl-1 text-sm text-white/50 transition-colors duration-300 hover:border-[#ffc500]/40 hover:bg-white/[0.05] hover:text-white/80 focus-visible:text-white/80 focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+            style="--d: 260ms"
+        >
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-[#ffc500] px-2.5 py-0.5 text-[0.6875rem] font-semibold tracking-[0.12em] text-[#0c0d15] uppercase">
+                <svg class="h-2 w-2" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+                    <path d="M2 1v12l11-6z" />
+                </svg>
+                Trailer
+            </span>
+            <span>Grand Crank Auto<span class="hidden sm:inline"> is coming to Playdate</span></span>
+            <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 3l4 4-4 4" />
+            </svg>
+        </a>
+
         <h1 class="rise text-[clamp(3rem,9vw,8rem)] leading-[0.95] font-bold tracking-tight text-balance">
             Just good<br />engineering<span class="text-[#30347f]" aria-hidden="true">.</span>
         </h1>
@@ -90,7 +111,7 @@
     </div>
 </div>
 
-    <div class="flex flex-col justify-center [grid-area:1/1]" style="--gap: 370ms;" x-show="open" x-cloak="" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+    <div class="flex flex-col justify-center [grid-area:1/1]" style="--gap: 370ms;" x-show="open" x-cloak="" x-transition:enter="absolute inset-0 duration-350" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
     <div class="mx-auto w-full max-w-5xl py-8">
         <div class="rise flex items-center justify-between gap-4">
             <h2
@@ -121,7 +142,8 @@
     @focus="focus = 'humm'"
     @blur="focus = null"
 >
-    <div class="flex items-center gap-2.5">
+    <div>
+        <div class="flex items-center gap-2.5">
                         <svg class="h-5 w-5 -rotate-90" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" class="text-white/8" />
                             <circle cx="12" cy="12" r="9" stroke="url(#humm-arc)" stroke-width="1.5" stroke-linecap="round" class="arc-sweep" style="--d:340ms" />
@@ -137,9 +159,10 @@
                         </span>
                     </div>
 
-    <h3 class="mt-5 text-2xl font-bold tracking-tight">Humm</h3>
-    <p class="mt-2.5 text-sm leading-relaxed text-white/40 max-w-[22rem]">One dial for focus, sleep, wake and dream. Binaural programs under a soundscape mixed fresh every
-                session, each graded on the research behind it and honest about where the evidence thins.</p>
+        <h3 class="mt-5 text-2xl font-bold tracking-tight">Humm</h3>
+        <div class="mt-2.5 space-y-2.5 text-sm leading-relaxed text-white/40 max-w-[22rem]">One dial for focus, sleep, wake and dream. Binaural programs under a soundscape mixed fresh every
+                session, each graded on the research behind it and honest about where the evidence thins.</div>
+    </div>
 
     <div class="mt-auto pt-8 flex justify-center"><div class="fade-out -mb-24 w-[52%] rounded-[1.6rem] border border-white/10 bg-white/5 p-1.5 transition-transform duration-500 ease-out group-hover:-translate-y-2">
                         <img
@@ -161,7 +184,8 @@
     @focus="focus = 'devkeepr'"
     @blur="focus = null"
 >
-    <!-- Matches the height of Humm's dial glyph so both cards share a baseline. -->
+    <div>
+        <!-- Matches the height of Humm's dial glyph so both cards share a baseline. -->
                     <div class="flex h-5 items-center">
                         <span class="text-[0.6875rem] font-medium tracking-[0.18em] text-[color:var(--accent)]/80 uppercase">
                             macOS
@@ -169,9 +193,10 @@
                         </span>
                     </div>
 
-    <h3 class="mt-5 text-2xl font-bold tracking-tight">Devkeepr</h3>
-    <p class="mt-2.5 text-sm leading-relaxed text-white/40 max-w-lg">One home for every project on your machine. Dev servers, agents and terminals wait where you left them.
-                Idle projects shrink to reclaim disk and wake instantly, while the global toolchain updates on its own.</p>
+        <h3 class="mt-5 text-2xl font-bold tracking-tight">Devkeepr</h3>
+        <div class="mt-2.5 space-y-2.5 text-sm leading-relaxed text-white/40 max-w-lg">One home for every project on your machine. Dev servers, agents and terminals wait where you left them.
+                Idle projects shrink to reclaim disk and wake instantly, while the global toolchain updates on its own.</div>
+    </div>
 
     <div class="mt-auto pt-8"><div class="fade-out -mb-8 transition-transform duration-500 ease-out group-hover:-translate-y-2">
                         <img
@@ -186,7 +211,65 @@
 </a>
         </div>
 
-        <p class="rise mt-6 text-sm text-white/25" style="--d: 260ms">
+        <h2 class="rise mt-14 text-xs tracking-[0.2em] text-white/30 uppercase" style="--d: 240ms">Coming soon</h2>
+
+        
+        <a
+    target="_self" rel="noopener noreferrer" style="--accent: #ffc500; --d: 300ms;" class="rise group relative flex min-h-[24rem] flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-7 transition-colors duration-500 hover:border-[color:var(--accent)]/40 hover:bg-white/[0.04] focus-visible:border-[color:var(--accent)]/60 focus-visible:bg-white/[0.04] focus-visible:outline-none gap-8 lg:flex-row lg:items-center lg:justify-between mt-6" @click.prevent="watch()"
+    href="https://trailheadlabs.co/grand-crank-auto"
+    @mouseenter="focus = 'grand-crank-auto'"
+    @mouseleave="focus = null"
+    @focus="focus = 'grand-crank-auto'"
+    @blur="focus = null"
+>
+    <div>
+        <div class="flex items-center gap-2.5">
+                    <!-- The crank seen down its axle, so turning it on hover spins it the way it really turns. -->
+                    <svg class="h-5 w-5 text-[color:var(--accent)] opacity-80 motion-safe:group-hover:animate-spin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M9.75 5v7a2.25 2.25 0 0 0 4.5 0V5zM13 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        <circle cx="12" cy="4.75" r="3.75" />
+                    </svg>
+                    <span class="text-[0.6875rem] font-medium tracking-[0.18em] text-[color:var(--accent)]/80 uppercase">
+                        Playdate
+                    </span>
+                </div>
+
+        <h3 class="mt-5 text-2xl font-bold tracking-tight">Grand Crank Auto</h3>
+        <div class="mt-2.5 space-y-2.5 text-sm leading-relaxed text-white/40 max-w-md"><p>
+                An untouched countryside, teeming with life: mountains, a forest, a waterfall, a river and a lake,
+                farmland, pastures and meadows. At its heart a city with working traffic and emergency services, where
+                people live their lives and look after each other in perfect harmony.
+            </p>
+            <p class="text-white/70">Until you came along.</p>
+            <p>A 1-bit, top-down open world, crank-powered crime sandbox.</p>
+            <p class="flex items-center gap-2 pt-5 text-[color:var(--accent)]/80 transition-colors duration-200 group-hover:text-[color:var(--accent)]">
+                <svg class="h-3 w-3" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+                    <path d="M2 1v12l11-6z" />
+                </svg>
+                Watch the trailer
+            </p></div>
+    </div>
+
+    <div class=""><div class="relative w-fit max-w-full rounded-xl border border-white/10 bg-white/5 p-1.5 transition-transform duration-500 ease-out group-hover:-translate-y-1">
+                    <!-- Shown at exactly 400px so every pixel of the Playdate screen lands on the grid. -->
+                    <img
+                        src="/work/grand-crank-auto.png?v=1792395909"
+                        alt="The Grand Crank Auto title card"
+                        width="800"
+                        height="480"
+                        loading="lazy"
+                        class="block w-[400px] max-w-full rounded-md"
+                    />
+                    <span class="absolute right-4 bottom-4 flex items-center gap-1.5 rounded-full bg-white/10 px-2 py-0.5 text-[0.6875rem] text-white/70 tabular-nums backdrop-blur-sm transition-colors duration-300 group-hover:bg-[color:var(--accent)] group-hover:text-[#0c0d15]" aria-hidden="true">
+                        <svg class="h-2 w-2" viewBox="0 0 14 14" fill="currentColor">
+                            <path d="M2 1v12l11-6z" />
+                        </svg>
+                        1:25
+                    </span>
+                </div></div>
+</a>
+
+        <p class="rise mt-6 text-sm text-white/25" style="--d: 360ms">
             Writing and open source at
             <a
                 href="https://leuver.ink"
@@ -196,7 +279,57 @@
             >leuver.ink</a>
         </p>
     </div>
-</div></main>
+</div>
+
+    <dialog
+    x-ref="trailer"
+    aria-label="Grand Crank Auto trailer"
+    tabindex="-1"
+    @click.self="$el.close()"
+    @close="stopWatching()"
+    class="trailer m-auto w-[min(800px,calc(100vw-2rem),calc((100svh-7rem)*5/3))] overflow-visible bg-transparent text-white focus:outline-none"
+>
+    <div class="flex items-center justify-between gap-4 pb-3">
+        <p class="text-xs tracking-[0.2em] text-white/40 uppercase">Grand Crank Auto</p>
+        <button
+            type="button"
+            @click="$refs.trailer.close()"
+            class="group flex cursor-pointer items-center gap-1.5 rounded px-2 py-1 text-sm text-white/40 transition-colors duration-200 hover:text-white/80 focus-visible:text-white/80 focus-visible:ring-2 focus-visible:ring-[#30347f] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0c0d15] focus-visible:outline-none"
+        >
+            Close
+            <svg class="h-3 w-3 translate-y-px transition-transform duration-300 group-hover:rotate-90" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M3 3l8 8M11 3l-8 8" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="relative">
+        <video
+            x-ref="trailerVideo"
+            src="/work/grand-crank-auto.mp4?v=1792395910"
+            poster="/work/grand-crank-auto.png?v=1792395909"
+            preload="none"
+            playsinline
+            @play="playing = true"
+            @play.once="$el.controls = true"
+            @pause="playing = false"
+            class="block aspect-[5/3] w-full rounded-xl border border-white/10 bg-black"
+        ></video>
+
+        
+        <button
+            type="button"
+            x-show="! playing"
+            @click="$refs.trailerVideo.play()"
+            class="absolute top-3/4 left-1/2 flex -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center gap-2 rounded-full bg-[#ffc500] px-5 py-2.5 text-sm font-semibold text-[#0c0d15] shadow-lg shadow-black/40 transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-none"
+        >
+            <svg class="h-3 w-3" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+                <path d="M2 1v12l11-6z" />
+            </svg>
+            Play trailer
+        </button>
+    </div>
+</dialog></main>
 
     <footer class="relative z-10 flex items-center justify-between px-8 py-6 text-xs text-white/20">
     <span x-init x-cloak>
