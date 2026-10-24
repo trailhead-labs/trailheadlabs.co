@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class LandingPageTest extends TestCase
@@ -36,6 +37,73 @@ class LandingPageTest extends TestCase
             ->assertSee('https://devkeepr.app');
     }
 
+    public function test_it_shows_grand_crank_auto_as_coming_soon(): void
+    {
+        $this->get('/')
+            ->assertSeeInOrder(['Coming soon', 'Grand Crank Auto'])
+            ->assertSeeInOrder([
+                'An untouched countryside, teeming with life',
+                'Until you came along',
+                'A 1-bit, top-down open world, crank-powered crime sandbox.',
+            ])
+            ->assertSee('Watch the trailer');
+    }
+
+    public function test_the_home_banner_and_the_game_card_both_link_to_the_trailer(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertSee('<dialog', false)
+            ->assertSee('x-ref="trailer"', false)
+            ->assertSee('is coming to Playdate');
+
+        $html = $response->getContent();
+
+        $this->assertSame(2, Str::substrCount($html, 'href="'.route('trailer').'"'));
+        $this->assertSame(2, Str::substrCount($html, '@click.prevent="watch()"'));
+    }
+
+    public function test_search_snippets_do_not_quote_the_game_as_the_studio(): void
+    {
+        $html = $this->get('/')->getContent();
+
+        $this->assertSame(2, Str::substrCount($html, 'data-nosnippet'));
+    }
+
+    public function test_the_trailer_has_an_address_of_its_own(): void
+    {
+        $this->get('/grand-crank-auto')
+            ->assertOk()
+            ->assertSee('<title>Grand Crank Auto · Trailhead Labs</title>', false)
+            ->assertSee('data-trailer-path="/grand-crank-auto"', false)
+            ->assertSee('Just good');
+    }
+
+    public function test_the_trailer_unfurls_as_the_game_when_shared(): void
+    {
+        $this->get('/grand-crank-auto')
+            ->assertSee('<meta property="og:type" content="video.other" />', false)
+            ->assertSee('<meta property="og:title" content="Grand Crank Auto" />', false)
+            ->assertSee('<meta property="og:description" content="A 1-bit, top-down open world, crank-powered crime sandbox. Coming soon to Playdate." />', false)
+            ->assertSee('<meta property="og:url" content="'.route('trailer').'" />', false)
+            ->assertSee('<meta property="og:image" content="'.url('/work/grand-crank-auto-og.png').'?v=', false)
+            ->assertSee('<meta property="og:video" content="'.url('/work/grand-crank-auto.mp4').'?v=', false)
+            ->assertSee('<meta name="twitter:card" content="summary_large_image" />', false);
+    }
+
+    public function test_the_home_page_keeps_its_own_title_and_no_share_card(): void
+    {
+        $this->get('/')
+            ->assertSee('<title>Trailhead Labs</title>', false)
+            ->assertSee('Independent engineering for web, desktop and mobile.')
+            ->assertDontSee('og:', false);
+    }
+
+    public function test_the_trailer_is_not_downloaded_until_it_is_asked_for(): void
+    {
+        $this->get('/')->assertSee('preload="none"', false);
+    }
+
     public function test_the_work_stage_is_wired_to_the_ambient_blobs(): void
     {
         $response = $this->get('/');
@@ -44,7 +112,9 @@ class LandingPageTest extends TestCase
             ->assertSee('blob-humm')
             ->assertSee('blob-devkeepr')
             ->assertSee("focus = 'humm'", false)
-            ->assertSee("focus = 'devkeepr'", false);
+            ->assertSee("focus = 'devkeepr'", false)
+            ->assertSee('blob-grand-crank-auto')
+            ->assertSee("focus = 'grand-crank-auto'", false);
     }
 
     public function test_public_assets_carry_a_cache_busting_stamp(): void
@@ -52,7 +122,9 @@ class LandingPageTest extends TestCase
         $this->get('/')
             ->assertSee('/logo.svg?v=', false)
             ->assertSee('/work/humm.webp?v=', false)
-            ->assertSee('/work/devkeepr.webp?v=', false);
+            ->assertSee('/work/devkeepr.webp?v=', false)
+            ->assertSee('/work/grand-crank-auto.png?v=', false)
+            ->assertSee('/work/grand-crank-auto.mp4?v=', false);
     }
 
     public function test_it_serves_without_cookies_or_a_session(): void

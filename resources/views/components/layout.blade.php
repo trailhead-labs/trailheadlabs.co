@@ -1,5 +1,5 @@
 @props([
-    'title' => 'Trailhead Labs',
+    'title' => null,
     'description' => 'Independent engineering for web, desktop and mobile. Client work and our own products, held to the same bar: software that ships and holds up.',
 ])
 
@@ -8,8 +8,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ $title }}</title>
+    <title>{{ $title ? "{$title} · Trailhead Labs" : 'Trailhead Labs' }}</title>
     <meta name="description" content="{{ $description }}" />
+    {{ $head ?? '' }}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" type="image/svg+xml" href="{{ url()->version('/logo.svg') }}" />
     <x-analytics />

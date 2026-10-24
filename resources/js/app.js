@@ -3,12 +3,24 @@ import Alpine from 'alpinejs'
 Alpine.data('site', () => ({
     open: window.location.hash === '#work',
     focus: null,
+    playing: false,
 
     init() {
         window.addEventListener('popstate', () => {
             this.open = window.location.hash === '#work'
             this.focus = null
+
+            if (this.onTrailer()) {
+                this.watch()
+            } else {
+                this.$refs.trailer.close()
+            }
         })
+
+        // A shared link lands on the trailer, so it opens straight over the hero.
+        if (this.onTrailer()) {
+            this.$nextTick(() => this.watch())
+        }
     },
 
     // Raises the work stage and gives the browser a stop to come back to.
@@ -24,6 +36,45 @@ Alpine.data('site', () => ({
         this.focus = null
         history.pushState(null, '', window.location.pathname)
         this.$nextTick(() => this.$refs.trigger?.focus())
+    },
+
+    /**
+     * Opens the trailer over whatever is on stage, under an address of its
+     * own so it can be shared. Without a click to go on, a browser may
+     * refuse to roll it, and the play button waits there instead.
+     */
+    watch() {
+        if (! this.onTrailer()) {
+            history.pushState({ trailer: true }, '', this.$root.dataset.trailerPath)
+        }
+
+        // The window takes focus itself, so the close button does not light up on arrival.
+        if (! this.$refs.trailer.open) {
+            this.$refs.trailer.showModal()
+            this.$refs.trailer.focus()
+        }
+
+        this.$refs.trailerVideo.play().catch(() => {})
+    },
+
+    /**
+     * Stops the trailer and hands the address back. One opened from the
+     * page steps back to where it was, and one a link landed on
+     * settles on the home page instead.
+     */
+    stopWatching() {
+        this.$refs.trailerVideo.pause()
+
+        if (history.state?.trailer) {
+            history.back()
+        } else if (this.onTrailer()) {
+            history.replaceState(null, '', '/')
+        }
+    },
+
+    // Static hosts may add a trailing slash, so the address is compared without one.
+    onTrailer() {
+        return window.location.pathname.replace(/\/$/, '') === this.$root.dataset.trailerPath
     },
 }))
 

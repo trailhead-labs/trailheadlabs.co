@@ -75,9 +75,8 @@
   animation: drift-2 34s ease-in-out infinite;
 }
 
-/* The two product lights, dark until the work is on stage. */
-.blob-humm,
-.blob-devkeepr {
+/* The product lights, dark until the work is on stage. */
+.blob-product {
   opacity: 0;
 }
 
@@ -106,20 +105,33 @@
   animation: drift-4 30s ease-in-out infinite;
 }
 
+/* The game sits below the products, so its light rises from the bottom of the room. */
+.blob-grand-crank-auto {
+  width: 760px;
+  height: 560px;
+  bottom: -300px;
+  left: 50%;
+  margin-left: -380px;
+}
+.blob-grand-crank-auto > i {
+  background: radial-gradient(circle at 50% 45%, rgba(255, 197, 0, 0.26), rgba(245, 158, 11, 0.1) 70%);
+  animation: drift-3 26s ease-in-out infinite;
+}
+
 /* Opening the work pulls the house lights down and brings the products up. */
 .work-open .blob-1 { opacity: 0.4; }
 .work-open .blob-2 { opacity: 0.3; }
 .work-open .blob-humm { opacity: 0.5; }
 .work-open .blob-devkeepr { opacity: 0.45; }
+.work-open .blob-grand-crank-auto { opacity: 0.3; }
 
-/* Looking at one product lights the room in its color. */
-body[data-focus="humm"] .blob-humm { opacity: 1; transform: scale(1.12); }
-body[data-focus="humm"] .blob-devkeepr { opacity: 0.08; }
-body[data-focus="humm"] .blob-1 { opacity: 0.15; }
+/* Looking at one product dims the room and lights it in that product's color. */
+body[data-focus] .blob-1 { opacity: 0.15; }
+body[data-focus] .blob-product { opacity: 0.08; }
 
-body[data-focus="devkeepr"] .blob-devkeepr { opacity: 1; transform: scale(1.12); }
-body[data-focus="devkeepr"] .blob-humm { opacity: 0.08; }
-body[data-focus="devkeepr"] .blob-1 { opacity: 0.15; }
+body[data-focus="humm"] .blob-humm,
+body[data-focus="devkeepr"] .blob-devkeepr,
+body[data-focus="grand-crank-auto"] .blob-grand-crank-auto { opacity: 1; transform: scale(1.12); }
 
 /*
  * Layers animate on the display flip Alpine performs, so every
@@ -198,6 +210,56 @@ body[data-focus="devkeepr"] .blob-1 { opacity: 0.15; }
   opacity: 1;
 }
 
+/*
+ * The trailer window comes up out of a dimmed room and sinks back
+ * on the way out. Browsers without the discrete transitions
+ * simply open and close it without the motion.
+ */
+.trailer {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition:
+    opacity 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    overlay 350ms allow-discrete,
+    display 350ms allow-discrete;
+}
+.trailer[open] {
+  opacity: 1;
+  transform: none;
+}
+.trailer::backdrop {
+  background: rgba(6, 7, 12, 0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color 350ms ease,
+    backdrop-filter 350ms ease,
+    overlay 350ms allow-discrete,
+    display 350ms allow-discrete;
+}
+.trailer[open]::backdrop {
+  background: rgba(6, 7, 12, 0.85);
+  backdrop-filter: blur(6px);
+}
+@starting-style {
+  .trailer[open] {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  .trailer[open]::backdrop {
+    background: rgba(6, 7, 12, 0);
+    backdrop-filter: blur(0);
+  }
+}
+
+/* The page and its lights hold still behind the trailer, so the blur over them is drawn once. */
+html:has(.trailer[open]) {
+  overflow: hidden;
+}
+html:has(.trailer[open]) .blob > i {
+  animation-play-state: paused;
+}
+
 /* Screenshots dissolve into the panel instead of stopping at an edge. */
 .fade-out {
   -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
@@ -209,5 +271,6 @@ body[data-focus="devkeepr"] .blob-1 { opacity: 0.15; }
   .rise { animation: none; }
   .arc-sweep { animation: none; stroke-dashoffset: 16; }
   .blob { transition-duration: 1ms; }
+  .trailer, .trailer::backdrop { transition-duration: 1ms; }
   body[data-focus] .blob { transform: none; }
 }

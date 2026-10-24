@@ -107,7 +107,77 @@
             </x-work-card>
         </div>
 
-        <p class="rise mt-6 text-sm text-white/25" style="--d: 260ms">
+        <h2 class="rise mt-14 text-xs tracking-[0.2em] text-white/30 uppercase" style="--d: 240ms">Coming soon</h2>
+
+        {{--
+            The game has no page of its own yet, so its card opens the trailer
+            over the stage instead of leaving the site. The address stays
+            on the link, so it can still be copied and shared. Search
+            engines leave it out of their snippets, as its copy is
+            the longest here and was shown as the studio's own.
+        --}}
+        <x-work-card
+            name="grand-crank-auto"
+            :href="route('trailer')"
+            title="Grand Crank Auto"
+            accent="#ffc500"
+            copy-width="max-w-md"
+            wide
+            target="_self"
+            @click.prevent="watch()"
+            data-nosnippet=""
+            class="mt-6"
+            style="--d: 300ms"
+        >
+            <x-slot:eyebrow>
+                <div class="flex items-center gap-2.5">
+                    <!-- The crank seen down its axle, so turning it on hover spins it the way it really turns. -->
+                    <svg class="h-5 w-5 text-[color:var(--accent)] opacity-80 motion-safe:group-hover:animate-spin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M9.75 5v7a2.25 2.25 0 0 0 4.5 0V5zM13 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        <circle cx="12" cy="4.75" r="3.75" />
+                    </svg>
+                    <span class="text-[0.6875rem] font-medium tracking-[0.18em] text-[color:var(--accent)]/80 uppercase">
+                        Playdate
+                    </span>
+                </div>
+            </x-slot:eyebrow>
+
+            <p>
+                An untouched countryside, teeming with life: mountains, a forest, a waterfall, a river and a lake,
+                farmland, pastures and meadows. At its heart a city with working traffic and emergency services, where
+                people live their lives and look after each other in perfect harmony.
+            </p>
+            <p class="text-white/70">Until you came along.</p>
+            <p>A 1-bit, top-down open world, crank-powered crime sandbox.</p>
+            <p class="flex items-center gap-2 pt-5 text-[color:var(--accent)]/80 transition-colors duration-200 group-hover:text-[color:var(--accent)]">
+                <svg class="h-3 w-3" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+                    <path d="M2 1v12l11-6z" />
+                </svg>
+                Watch the trailer
+            </p>
+
+            <x-slot:shot>
+                <div class="relative w-fit max-w-full rounded-xl border border-white/10 bg-white/5 p-1.5 transition-transform duration-500 ease-out group-hover:-translate-y-1">
+                    <!-- Shown at exactly 400px so every pixel of the Playdate screen lands on the grid. -->
+                    <img
+                        src="{{ url()->version('/work/grand-crank-auto.png') }}"
+                        alt="The Grand Crank Auto title card"
+                        width="800"
+                        height="480"
+                        loading="lazy"
+                        class="block w-[400px] max-w-full rounded-md"
+                    />
+                    <span class="absolute right-4 bottom-4 flex items-center gap-1.5 rounded-full bg-white/10 px-2 py-0.5 text-[0.6875rem] text-white/70 tabular-nums backdrop-blur-sm transition-colors duration-300 group-hover:bg-[color:var(--accent)] group-hover:text-[#0c0d15]" aria-hidden="true">
+                        <svg class="h-2 w-2" viewBox="0 0 14 14" fill="currentColor">
+                            <path d="M2 1v12l11-6z" />
+                        </svg>
+                        1:25
+                    </span>
+                </div>
+            </x-slot:shot>
+        </x-work-card>
+
+        <p class="rise mt-6 text-sm text-white/25" style="--d: 360ms">
             Writing and open source at
             <a
                 href="https://leuver.ink"
