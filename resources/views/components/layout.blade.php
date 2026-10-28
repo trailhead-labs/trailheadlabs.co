@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ $title ? "{$title} · Trailhead Labs" : 'Trailhead Labs' }}</title>
     <meta name="description" content="{{ $description }}" />
+    <meta name="twitter:creator" content="@gwleuverink" />
     {{ $head ?? '' }}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" type="image/svg+xml" href="{{ url()->version('/logo.svg') }}" />
